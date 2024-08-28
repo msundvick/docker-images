@@ -1,4 +1,4 @@
-FROM rust:1.77.0-slim-bullseye
+FROM rust:1.77.0-slim-bookworm
 
 RUN apt update && apt upgrade -y && \
     apt install -y git curl clang llvm xz-utils python3-venv python3-pip
