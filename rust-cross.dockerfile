@@ -1,7 +1,7 @@
-FROM rust:1.77.0-slim-bookworm
+FROM rust:1.89-slim-bookworm
 
 RUN apt update && apt upgrade -y && \
-    apt install -y git curl clang llvm xz-utils python3-venv python3-pip
+    apt install -y git curl clang llvm xz-utils python3-venv python3-pip protobuf-compiler wine64 pipx
 
 ENV zigVersion "zig-linux-x86_64-0.12.0"
 ENV PATH "/usr/local/zig:$PATH"
@@ -17,3 +17,6 @@ RUN cd root && cargo new tmp && cd tmp && rustup target add x86_64-pc-windows-ms
 
 ENV AR_X86_64_PC_WINDOWS_MSVC="llvm-ar-11"
 ENV CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS="-C linker-flavor=lld-link"
+ENV CARGO_NET_GIT_FETCH_WITH_CLI="true"
+ENV PATH "/root/.local/bin:$PATH"
+RUN pipx install uv
